@@ -28,44 +28,48 @@ import java.util.*;
 ------- ------- -------*/
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println(presses("LOL"));
+        System.out.println(presses("7 "));
 
     }
 
 
     public static int presses(String phrase) {
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
-        char[] alphabetChar = alphabet.toCharArray();
-        char[] chNums = phrase.toLowerCase().toCharArray();
-        HashMap<Character, Integer> hashMap = new HashMap<>();
-        for (int i = 0; i < alphabetChar.length-1; i += 3) {
+        String[] alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < alphabet.length-1; i += 3) {
             if (i==15) {
-                hashMap.put(alphabetChar[i], 1);
-                hashMap.put(alphabetChar[i + 1], 2);
-                hashMap.put(alphabetChar[i + 2], 3);
-                hashMap.put(alphabetChar[i + 3], 4);
+                hashMap.put(alphabet[i], 1);
+                hashMap.put(alphabet[i + 1], 2);
+                hashMap.put(alphabet[i + 2], 3);
+                hashMap.put(alphabet[i + 3], 4);
              i++;
             }
 
             else {
-                hashMap.put(alphabetChar[i], 1);
-                hashMap.put(alphabetChar[i + 1], 2);
-                hashMap.put(alphabetChar[i + 2], 3);
+                hashMap.put(alphabet[i], 1);
+                hashMap.put(alphabet[i + 1], 2);
+                hashMap.put(alphabet[i + 2], 3);
             }
         }
-     hashMap.put(alphabetChar[24],3);
-     hashMap.put(alphabetChar[25],4);
-     hashMap.put(' ',1);
-        for (int i = 1; i <9 ; i++) {
-            hashMap.put()
-
+     hashMap.put(alphabet[24],3);
+     hashMap.put(alphabet[25],4);
+     hashMap.put(" ",1);
+     hashMap.put("#",1);
+     hashMap.put("*",1);
+     hashMap.put("0",2);
+        for (int i = 2; i <=6 ; i++) {
+            hashMap.put(Integer.toString(i),4);
         }
+        hashMap.put("7",5);
+        hashMap.put("8",4);
+        hashMap.put("9",5);
+        hashMap.put("1",1);
 
         int sum =0;
-        char [] res = phrase.toCharArray();
+        String [] res = phrase.split("");
         for (int i = 0; i <res.length ; i++) {
             for (Map.Entry entry : hashMap.entrySet()) {
-                              if (entry.getKey().toString().equalsIgnoreCase(Character.toString(res[i])))
+                              if (entry.getKey().toString().equalsIgnoreCase((res[i])))
                     sum+=Integer.parseInt(entry.getValue().toString());
             }
         }
