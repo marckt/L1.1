@@ -1,13 +1,4 @@
 package main;
-
-import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
-
-import java.awt.*;
 import java.util.*;
 
 /*------- ------- -------
@@ -32,7 +23,6 @@ public class Main {
 
     }
 
-
     public static int presses(String phrase) {
         String[] alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
         HashMap<String, Integer> hashMap = new HashMap<>();
@@ -44,18 +34,20 @@ public class Main {
                 hashMap.put(alphabet[i + 3], 4);
              i++;
             }
-
             else {
                 hashMap.put(alphabet[i], 1);
                 hashMap.put(alphabet[i + 1], 2);
                 hashMap.put(alphabet[i + 2], 3);
             }
         }
+        String [] one = {" ", "#","*","1"};
+        for (int i = 0; i <one.length ; i++) {
+            hashMap.put(one[i],1);
+        }
+
      hashMap.put(alphabet[24],3);
      hashMap.put(alphabet[25],4);
-     hashMap.put(" ",1);
-     hashMap.put("#",1);
-     hashMap.put("*",1);
+
      hashMap.put("0",2);
         for (int i = 2; i <=6 ; i++) {
             hashMap.put(Integer.toString(i),4);
@@ -63,7 +55,6 @@ public class Main {
         hashMap.put("7",5);
         hashMap.put("8",4);
         hashMap.put("9",5);
-        hashMap.put("1",1);
 
         int sum =0;
         String [] res = phrase.split("");
@@ -73,7 +64,6 @@ public class Main {
                     sum+=Integer.parseInt(entry.getValue().toString());
             }
         }
-
         return sum;
     }
 }
