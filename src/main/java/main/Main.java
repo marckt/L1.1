@@ -19,25 +19,21 @@ import java.util.*;
 ------- ------- -------*/
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println(presses("7 "));
+        System.out.println(presses("z"));
+        System.out.println(" 30:85:a9:af:0b:73".replaceAll(":", "").toUpperCase());
 
     }
 
     public static int presses(String phrase) {
-        String[] alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+        String[] alphabet = "abcdefghijklmnopqrstuvwxyz #*1".split("");
         HashMap<String, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < alphabet.length-1; i += 3) {
-            if (i==15) {
                 hashMap.put(alphabet[i], 1);
                 hashMap.put(alphabet[i + 1], 2);
                 hashMap.put(alphabet[i + 2], 3);
-                hashMap.put(alphabet[i + 3], 4);
-             i++;
-            }
-            else {
-                hashMap.put(alphabet[i], 1);
-                hashMap.put(alphabet[i + 1], 2);
-                hashMap.put(alphabet[i + 2], 3);
+            if (i==15|| i ==22) {
+               hashMap.put(alphabet[i + 3], 4);
+                i++;
             }
         }
         String [] one = {" ", "#","*","1"};
