@@ -1,83 +1,107 @@
 package main;
 
 import java.beans.Expression;
+import java.util.Random;
 
 public class Test4 {
     public static void main(String[] args) {
-        int found=0;
-        String strin =  "??*3?3=-?545";
-        String a=  a(strin); //a
-        System.out.println(a);
-        String b = b(strin); //b
-        String wtf = wtf(strin); //+ - *
-        String result = answ(strin); //otvet
 
-        switch (wtf) {
-            case "*": {
-                for (int i = 0; i < 10; i++) {
+        System.out.println(solveExpression("?0?+??=?60"));
+           }
 
-                    int a1 = Integer.parseInt(a.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    int b1 = Integer.parseInt(b.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    int result1 = Integer.parseInt(result.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    if (a1 * b1 == result1) {
-                        found = i;
-                        break;
-                    }
-                }
-            }
-            case "+":{
-                for (int i = 0; i < 10; i++) {
-
-                    int a1 = Integer.parseInt(a.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    int b1 = Integer.parseInt(b.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    int result1 = Integer.parseInt(result.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    if (a1 + b1 == result1) {
-                        found = i;
-                        break;
-                    }
-                }
-            }
-            case "-": {
-                for (int i = 0; i < 10; i++) {
-                    int a1 = Integer.parseInt(a.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    int b1 = Integer.parseInt(b.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    int result1 = Integer.parseInt(result.replaceAll("\\?", Integer.valueOf(i).toString()));
-                    if (a1 - b1 == result1) {
-                        found = i;
-                        break;
-                    }
-                }
-            }
-        }
-        System.out.println(found);
-    }
     public static int solveExpression( final String expression ) {
-
         int missingDigit = -1;
 
-        return missingDigit;
-    }
-
-
-    private static String wtf(String str){
-        String res = "";
-        String[] math = new String[] {"*","+"};
-        for (String s: math
-                ) { if ((str.contains(s)))
-            res = Character.toString(str.charAt(str.indexOf(s)));
+        String a ;
+        int inxexb = 0;
+        int indexFuck = 0;
+        String op;
+        String res=expression.substring(expression.indexOf("=")+1);
+        String f[] = expression.split("");
+        a = f[0];
+        int i = 1;
+        while (true) {
+            if (f[i].equals("-") || f[i].equals("*") || f[i].equals("+")) {
+                op = f[i];
+                inxexb= i;
+                    break;
+            }
+            a += f[i];
+            i++;
         }
-        return res;
-    }
-    private static String answ(String str){
-        return   str.substring(str.indexOf("=")+1);
-    }
-    private static String a(String str){
-       String[] f= str.split("^([-]?[a-z \\?])",1);
-        System.out.println(f[0]);
-       return f[0];
-    }
-    private static String b(String str){
-        return str.substring(str.indexOf(wtf(str))+1,str.indexOf(answ(str))-1);
+        String b = null;
+        try {
+            b = expression.substring(inxexb+1,expression.indexOf("="));
+        } catch (Exception e) {
+            return missingDigit;
+        }
+        int start = 0;
+        if (b.startsWith("??")||a.startsWith("??")||res.startsWith("??"))
+            start++;
+         switch (op) {
+
+            case "*": {
+                for (int j=start; j < 10; j++) {
+                    int a1 = 0;
+                    int b1 = 0;
+                    int result1 = 0;
+                    try {
+                        a1 = Integer.parseInt(a.replaceAll("\\?", Integer.valueOf(j).toString()));
+                        b1 = Integer.parseInt(b.replaceAll("\\?", Integer.valueOf(j).toString()));
+                        result1 = Integer.parseInt(res.replaceAll("\\?", Integer.valueOf(j).toString()));
+                    } catch (NumberFormatException e) {
+                        return missingDigit;
+                    }
+                    if (a1 * b1 == result1&&(!expression.contains(Integer.valueOf(j).toString()))) {
+                        missingDigit = j;
+                        break;
+                    }
+                }
+                break;
+            }
+            case "+": {
+                for (int j = start; j < 10; j++) {
+
+                    int a1 = 0;
+                    int b1 = 0;
+                    int result1 = 0;
+                    try {
+                        a1 = Integer.parseInt(a.replaceAll("\\?", Integer.valueOf(j).toString()));
+                        b1 = Integer.parseInt(b.replaceAll("\\?", Integer.valueOf(j).toString()));
+                        result1 = Integer.parseInt(res.replaceAll("\\?", Integer.valueOf(j).toString()));
+                    } catch (NumberFormatException e) {
+                        return missingDigit;
+                    }
+                    if ((a1 + b1 == result1)&&(!expression.contains(Integer.valueOf(j).toString()))) {
+                        missingDigit = j;
+                        break;
+                    }
+                }
+                break;
+            }
+            case "-": {
+                for (int j = start; j < 10; j++) {
+                    int a1 = 0;
+                    int b1 = 0;
+                    int result1 = 0;
+                    try {
+                        a1 = Integer.parseInt(a.replaceAll("\\?", Integer.valueOf(j).toString()));
+                        b1 = Integer.parseInt(b.replaceAll("\\?", Integer.valueOf(j).toString()));
+                        result1 = Integer.parseInt(res.replaceAll("\\?", Integer.valueOf(j).toString()));
+                    } catch (NumberFormatException e) {
+                        return -1;
+                    }
+                    if (a1 - b1 == result1&&(!expression.contains(Integer.valueOf(j).toString()))) {
+                        missingDigit = j;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        return missingDigit;
 
     }
+
+
 }
