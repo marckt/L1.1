@@ -1,7 +1,5 @@
 package main;
 
-import java.beans.Expression;
-import java.util.Random;
 
 public class Test4 {
     public static void main(String[] args) {
@@ -11,13 +9,9 @@ public class Test4 {
 
     public static int solveExpression( final String expression ) {
         int missingDigit = -1;
-        int a1 = 0;
-        int b1 = 0;
-        int result1 = 0;
-        String a ;
-        int inxexb = 0;
-        int indexFuck = 0;
-        String op;
+        int a1,b1,result1,inxexb;
+        String a,op;
+
         String res=expression.substring(expression.indexOf("=")+1);
         String f[] = expression.split("");
         a = f[0];
@@ -31,7 +25,7 @@ public class Test4 {
             a += f[i];
             i++;
         }
-        String b = null;
+        String b;
         try {
             b = expression.substring(inxexb+1,expression.indexOf("="));
         } catch (Exception e) {
