@@ -83,11 +83,23 @@ public class PokerHand {
         cardsint();
         sb.setLength(0);
         return intsorted[4];
+    }    public int tirdCard() {
+        cardsint();
+        sb.setLength(0);
+        return intsorted[3];
+    }
+    private boolean isTwo() {
+        cardsint();
+        sb.setLength(0);
+        HashSet<Integer> used = new HashSet<>();
+        for (int i = 0; i <intsorted.length ; i++) {
+            used.add(intsorted[i]);
+        }
+        return used.size()<=3;
     }
 
     public boolean isKare() {
         cardsint();
-        sb.setLength(0);
         return ((intsorted[0] == intsorted[1]) && (intsorted[2] == intsorted[3]) && (intsorted[0] == intsorted[3]));
     }
 
@@ -176,11 +188,21 @@ public class PokerHand {
                 return pairMax > hand.pairMax ? Result.WIN : Result.LOSS;
             else return Result.LOSS;
         }
+        if (isTwo() && hand.isTwo()){
+            if (tirdCard() > hand.tirdCard()) {
+                return Result.WIN;
+            } else if (tirdCard() == hand.tirdCard())
+                return intsorted[4]==hand.intsorted[4]?Result.TIE:intsorted[4]>hand.intsorted[4]?Result.WIN:Result.LOSS;
+            else return Result.LOSS;
+        }
         else {System.out.println("Werwer"); return Result.WIN;}
     }
+
+
+
     public static void main(String[] args) {
-        PokerHand hand = new PokerHand("TC JD QD KD AD");
-        System.out.println(hand.compareWith(new PokerHand("2D 3D 4D 5D AD")));
+        PokerHand hand = new PokerHand("AC AD AD TD QD");
+        System.out.println(hand.compareWith(new PokerHand("AD AD AD TD 3D")));
 
     }
 }
